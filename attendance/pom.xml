@@ -15,13 +15,51 @@
     <bundle.symbolicName>org.openurp.webapp.apps.teach.attendance</bundle.symbolicName>
     <bundle.namespace>org.openurp.webapp.apps.teach.attendance</bundle.namespace>
     <beangle.version>4.1.0-SNAPSHOT</beangle.version>
+    <beangle.spring.version>4.0.3-SNAPSHOT</beangle.spring.version>
+    <beangle.struts2.version>4.0.2-SNAPSHOT</beangle.struts2.version>
+    <hibernate.version>4.3.1.Final</hibernate.version>
   </properties>
 
   <dependencies>
     <dependency>
-      <groupId>org.beangle.commons</groupId>
-      <artifactId>beangle-commons-core</artifactId>
-      <version>${beangle.version}</version>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.beangle.spring</groupId>
+      <artifactId>beangle-spring-hibernate</artifactId>
+      <version>${beangle.spring.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.beangle.spring</groupId>
+      <artifactId>beangle-spring-context</artifactId>
+      <version>${beangle.spring.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.beangle.struts2</groupId>
+      <artifactId>beangle-struts2-convention</artifactId>
+      <version>${beangle.struts2.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>${hibernate.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-ehcache</artifactId>
+      <version>${hibernate.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.beangle.struts2</groupId>
+      <artifactId>beangle-struts2-view</artifactId>
+      <version>${beangle.struts2.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
     </dependency>
   </dependencies>
 </project>
