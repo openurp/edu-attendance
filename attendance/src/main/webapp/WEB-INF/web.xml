@@ -65,7 +65,7 @@
 
   <servlet>
     <servlet-name>StaticResource</servlet-name>
-    <servlet-class>org.beangle.struts2.dispatcher.StaticResourceServlet</servlet-class>
+    <servlet-class>org.beangle.commons.web.resource.StaticResourceServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>

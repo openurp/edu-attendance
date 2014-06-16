@@ -12,4 +12,5 @@
   </bean>
   
   <bean class="org.openurp.webapp.apps.teach.attendance.AttendanceModule"/>
+  <bean class="org.openurp.webapp.apps.teach.attendance.admin.AdminModule"/>
 </beans>
