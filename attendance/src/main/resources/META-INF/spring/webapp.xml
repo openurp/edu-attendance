@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+ <bean id="systemVersion" class="org.beangle.commons.config.Version">
+  <property name="name" value="SFU Attendance System" />
+  <property name="version" value="0.0.1-SNAPSHOT" />
+  <property name="majorVersion" value="0" />
+  <property name="minorVersion" value="1" />
+  <property name="vendor" value="OpenUrp Software" />
+ </bean>
+<!-- 
+ <bean class="org.beangle.commons.web.resource.impl.PathResolverImpl"></bean>
+
+ <bean class="org.beangle.commons.io.ClasspathResourceLoader">
+  <constructor-arg>
+   <value>static</value>
+  </constructor-arg>
+ </bean>
+
+ <bean id="contentTypeFilter"
+  class="org.beangle.commons.web.resource.filter.ContentTypeFilter"
+  autowire="byType" />
+
+ <bean id="resourceProcessor" class="org.beangle.commons.web.resource.ResourceProcessor"
+  autowire="byType">
+  <property name="filters">
+   <list>
+    <bean class="org.beangle.commons.web.resource.filter.HeaderFilter" />
+    <ref bean="contentTypeFilter" />
+   </list>
+  </property>
+ </bean>
+ -->
+</beans>

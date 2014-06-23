@@ -1,9 +1,6 @@
 /home/chii/workspace/attend-report/webapp-apps-teach/attendance/target/classes
 /home/chii/.m2/repository/javax/validation/validation-api/1.1.0.Final/validation-api-1.1.0.Final.jar
-/home/chii/.eclipse/org.eclipse.platform_793567567_linux_gtk_x86_64/plugins/org.scala-lang.scala-library_2.11.0.v20140415-163722-cac6383e66.jar
-/home/chii/.eclipse/org.eclipse.platform_793567567_linux_gtk_x86_64/plugins/org.scala-lang.scala-reflect_2.11.0.v20140415-163722-cac6383e66.jar
-/home/chii/.eclipse/org.eclipse.platform_793567567_linux_gtk_x86_64/plugins/org.scala-lang.scala-actors_2.11.0.v20140415-163722-cac6383e66.jar
-/home/chii/.eclipse/org.eclipse.platform_793567567_linux_gtk_x86_64/configuration/org.eclipse.osgi/bundles/2847/1/.cp/target/lib/scala-swing.jar
+/home/chii/.m2/repository/org/beangle/spring/beangle-spring-hibernate/4.0.3-SNAPSHOT/beangle-spring-hibernate-4.0.3-SNAPSHOT.jar
 /home/chii/.m2/repository/org/beangle/commons/beangle-commons-core/4.1.0-SNAPSHOT/beangle-commons-core-4.1.0-SNAPSHOT.jar
 /home/chii/.m2/repository/org/slf4j/slf4j-api/1.7.7/slf4j-api-1.7.7.jar
 /home/chii/.m2/repository/org/beangle/data/beangle-data-jpa/4.1.0-SNAPSHOT/beangle-data-jpa-4.1.0-SNAPSHOT.jar
