@@ -4,4 +4,6 @@
     <module package = "User" schema="base"/>
     <module package = "UserCategory" schema="base"/>
   </module>
+  <module package = "org.openurp.kernel.base.unit.model" plau="true" schema="base">
+  </module>
 </modules>

@@ -5,6 +5,9 @@ import org.openurp.webapp.apps.teach.attendance.model.Form
 import org.openurp.webapp.apps.teach.attendance.service.AttendanceService
 import java.sql.Date
 import org.openurp.webapp.apps.teach.attendance.model.Item
+import org.beangle.security.context.SecurityContext
+import org.beangle.security.authc.Account
+import org.openurp.kernel.base.unit.model.UrpUserBean
 
 class AttendanceAction extends EntityDrivenAction {
 
@@ -16,12 +19,17 @@ class AttendanceAction extends EntityDrivenAction {
   override def save() = null
   override def remove() = null
 
+  protected def getUser(): UrpUserBean = {
+    if (SecurityContext.principal == SecurityContext.Anonymous) null
+    else entityDao.get(classOf[UrpUserBean], SecurityContext.principal.asInstanceOf[Account].id)
+  }
+  
   override def index() = {
     val form = populateForm()
     val item = attendanceService.count(form)
     put("item", item)
     put("college", attendanceService getCollege form.collegeId)
-    if(form.departmentId != 0){
+    if (form.departmentId != 0) {
       put("college", attendanceService getCollege form.departmentId)
     }
     put("teacher", attendanceService getTeacher form.teacherId)

@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.openurp.kernel.base.unit.model" default-access="org.beangle.hibernate.PropertyAccessor">
+
+  <typedef name="seq" class="org.beangle.hibernate.SeqType"/>
+  
+  <class name="UrpUserBean" entity-name="org.beangle.security.blueprint.domain.User">
+    <id name="id" type="long">
+      <generator class="org.beangle.data.jpa.hibernate.TableSeqGenerator" />
+    </id>
+    <property name="code" />
+    <property name="name" />
+    <property name="updatedAt" />
+    <property name="beginOn" />
+    <property name="endOn" />
+    <property name="enabled" />
+    <property name="email" />
+    <property name="credential" />
+    <property name="locked" />
+    <many-to-one name="category"/>
+    <many-to-one name="department"/>
+    <bag name="members" inverse="true" cascade="all-delete-orphan" collection-type="seq">
+      <key column="user_id" not-null="true"/>
+      <one-to-many class="org.beangle.security.blueprint.domain.Member"/>
+    </bag>
+  </class>
+
+  <class name="Department">
+    <id name="id" type="long">
+      <generator class="org.beangle.data.jpa.hibernate.TableSeqGenerator" />
+    </id>
+    <property name="code" />
+    <property name="name" />
+  </class>
+</hibernate-mapping>
+  
