@@ -13,7 +13,7 @@ import scala.math.Ordering
 
 class AttendanceServiceImpl extends AttendanceService {
 
-  var entityDao: GeneralDao = _
+  var attendanceDao: GeneralDao = _
 
   def count(form: Form): Item = {
     setDate(form)
@@ -36,7 +36,7 @@ class AttendanceServiceImpl extends AttendanceService {
       (if (form.departmentId != 0) s" and d.departmentid=${form.departmentId}" else "") +
       " group by d.attendtype"
     val query = SqlBuilder.sql(sql).params(Map[String, Any]()).param("start", form.startDate).param("end", form.endDate)
-    val result = entityDao.search(query.build)
+    val result = attendanceDao.search(query.build)
     val count = new Item()
     for (o <- result) {
       val array = o.asInstanceOf[Array[Object]]
@@ -50,11 +50,11 @@ class AttendanceServiceImpl extends AttendanceService {
       val now = new Date(System.currentTimeMillis())
       val sql = "select max(qssj), max(jzsj) from jxrl_t where qssj <= :now order by qssj desc"
       val query = SqlBuilder.sql(sql).params(Map[String, Any]()).param("now", now)
-      val result = entityDao.search(query.build)
+      val result = attendanceDao.search(query.build)
       if (result.size > 0) {
         val oo = result(0)
-        form.startDate = oo(0).asInstanceOf[Date]
-        form.endDate = oo(1).asInstanceOf[Date]
+        form.startDate = new Date(oo(0).asInstanceOf[java.util.Date].getTime())
+        form.endDate = new Date(oo(1).asInstanceOf[java.util.Date].getTime())
       } else {
         form.days = 0;
       }
@@ -167,7 +167,7 @@ class AttendanceServiceImpl extends AttendanceService {
       order by d.attenddate"""
     val query = SqlBuilder.sql(sql).params(Map[String, Any]())
     query.param("start", form.startDate).param("end", form.endDate)
-    val result = entityDao.search(query.build)
+    val result = attendanceDao.search(query.build)
     result.asInstanceOf[Seq[Item]]
   }
 
@@ -177,7 +177,7 @@ class AttendanceServiceImpl extends AttendanceService {
 
   def find(sql: SqlBuilder, form: Form, p: (Seq[_], Item) => Unit): Seq[Item] = {
     sql.param("start", form.startDate).param("end", form.endDate)
-    val result = entityDao.search(sql.build)
+    val result = attendanceDao.search(sql.build)
     val map = new HashMap[Any, Item]()
     for (o <- result) {
       val item = map.getOrElseUpdate(o(0), new Item(o(0)))
@@ -217,7 +217,7 @@ class AttendanceServiceImpl extends AttendanceService {
     if (id == 0) null
     else {
       val query = SqlBuilder.sql(sql)
-      val result = entityDao search query.build
+      val result = attendanceDao search query.build
       if (result.size > 0) new IdNameObject(result(0)(0), result(0)(1).toString) else null
     }
   }

@@ -3,13 +3,7 @@
 
  <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
   <property name="jndiName">
-   <value>java:comp/env/jdbc/eams</value>
-  </property>
- </bean>
-
- <bean id="sessionDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
-  <property name="jndiName">
-   <value>java:comp/env/jdbc/eams</value>
+   <value>java:comp/env/jdbc/security</value>
   </property>
  </bean>
 
@@ -17,21 +11,42 @@
   <property name="properties">
    <props merge="true">
     <prop key="hibernate.show_sql">false</prop>
-    <!-- <prop key="hibernate.hbm2ddl.auto">update</prop> -->
-    <prop key="hibernate.default_schema">eams</prop>
-    <prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
-   </props>
-  </property>
- </bean>
-
- <bean id="sessionHibernateConfig">
-  <property name="properties">
-   <props merge="true">
-    <prop key="hibernate.show_sql">false</prop>
-    <prop key="hibernate.default_schema">eams</prop>
-    <prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
+    <!-- <prop key="hibernate.hbm2ddl.auto">update</prop>
+    <prop key="hibernate.default_schema">eams</prop> -->
+    <prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
    </props>
   </property>
  </bean>
  
+  <bean id="properties">
+    <property name="value">
+      <value>
+        security.cas.server=http://portal.shfc.edu.cn/cas
+      </value>
+    </property>
+  </bean>
+  
+  <bean id="org.beangle.security.web.access.SecurityFilter">
+    <constructor-arg>
+      <list>
+        <ref bean="org.beangle.security.realm.cas.CasPreauthFilter"/>
+        <ref bean="org.beangle.security.web.access.HttpMethodPermissionFilter"/>
+      </list>
+    </constructor-arg>
+    <constructor-arg value="?" />
+    <constructor-arg value="?" />
+    <constructor-arg value="?" />
+  </bean>
+  
+  <bean id="org.beangle.security.authc.RealmAuthenticator">
+    <constructor-arg>
+      <list>
+        <ref bean="org.beangle.security.realm.cas.DefaultCasRealm"/>
+        <ref bean="org.beangle.security.blueprint.service.internal.DaoUserRealm"/>
+      </list>
+    </constructor-arg>
+  </bean>
+  
+  <bean id="org.beangle.security.realm.cas.CasEntryPoint" class="org.beangle.security.web.EntryPoint" primary="true"/>
+  <bean id="org.beangle.security.realm.cas.vendor.NeusoftCasTicketValidator" class="org.beangle.security.realm.cas.TicketValidator" primary="true"/>
 </beans>

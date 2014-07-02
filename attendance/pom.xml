@@ -2,7 +2,7 @@
   <parent>
     <groupId>org.beangle</groupId>
     <artifactId>beangle-scala</artifactId>
-    <version>14</version>
+    <version>15</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.openurp.webapp.apps</groupId>
@@ -17,6 +17,7 @@
     <beangle.version>4.1.0-SNAPSHOT</beangle.version>
     <beangle.spring.version>4.0.3-SNAPSHOT</beangle.spring.version>
     <beangle.struts2.version>4.0.2-SNAPSHOT</beangle.struts2.version>
+    <beangle.security.version>4.0.2-SNAPSHOT</beangle.security.version>
     <hibernate.version>4.3.1.Final</hibernate.version>
   </properties>
 
@@ -41,6 +42,26 @@
       <groupId>org.beangle.struts2</groupId>
       <artifactId>beangle-struts2-convention</artifactId>
       <version>${beangle.struts2.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.beangle.security</groupId>
+      <artifactId>beangle-security-blueprint</artifactId>
+      <version>${beangle.security.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.beangle.security</groupId>
+      <artifactId>beangle-security-session</artifactId>
+      <version>${beangle.security.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.beangle.security</groupId>
+      <artifactId>beangle-security-core</artifactId>
+      <version>${beangle.security.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.beangle.security</groupId>
+      <artifactId>beangle-security-web</artifactId>
+      <version>${beangle.security.version}</version>
     </dependency>
     <dependency>
       <groupId>org.hibernate</groupId>
