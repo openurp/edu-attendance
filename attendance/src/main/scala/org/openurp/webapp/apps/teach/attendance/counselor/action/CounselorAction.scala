@@ -7,7 +7,7 @@ class CounselorAction extends AttendanceAction{
   
   override def populateForm(): Form = {
     val form = super.populateForm
-    form.counselorId = 282
+    form.counselorId = getTeacherId
     form
   }
 }

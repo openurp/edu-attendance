@@ -10,7 +10,7 @@ class LessonAction extends AttendanceAction {
 
   override def populateForm(): Form = {
     val form = super.populateForm
-    form.teacherId = 269
+    form.teacherId = getTeacherId
     form
   }
 }

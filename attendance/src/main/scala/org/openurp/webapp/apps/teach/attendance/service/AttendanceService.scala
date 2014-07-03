@@ -31,6 +31,9 @@ trait AttendanceService {
   def getAdminclass(adminclassId: Long): IdNameObject
 
   def getStudent(studentId: Long): IdNameObject
-  
 
+  def getTeacherId(code: String): Long
+  
+  def getStudentId(code: String): Long
+  
 }

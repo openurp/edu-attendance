@@ -12,9 +12,9 @@
     <th>教室名称</th>
     <th>签到状态</th>
   [#elseif type == "td"]
-    <td>${item[0]}</td>
-    <td>${item[1]!}</td>
-    <td>${item[2]!}</td>
-    <td>${item[3]}</td>
+    <td align="center">${item[0]?string('yyyy-MM-dd')}</td>
+    <td align="center">${item[1]!}</td>
+    <td align="center">${item[2]!}</td>
+    <td align="center">${item[3]}</td>
   [/#if]
 [/@]

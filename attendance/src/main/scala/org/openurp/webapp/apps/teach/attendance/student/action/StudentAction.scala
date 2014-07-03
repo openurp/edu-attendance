@@ -7,10 +7,9 @@ class StudentAction extends AttendanceAction {
 
   override def populateForm(): Form = {
     val form = super.populateForm
-    form.studentId = getUserId
-    form.days  = 1
+    form.studentId = getStuentId
+    form.days = 1
     form
   }
-  
-  def getUserId = 68939
+
 }

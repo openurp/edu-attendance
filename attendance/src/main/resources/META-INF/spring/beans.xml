@@ -3,14 +3,4 @@
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
- <bean class="org.openurp.webapp.apps.teach.attendance.WebappModule" />
-
- <bean class="org.openurp.webapp.apps.teach.attendance.AttendanceModule" />
- <bean class="org.openurp.webapp.apps.teach.attendance.admin.AdminModule" />
- <bean class="org.openurp.webapp.apps.teach.attendance.stumgr.StumgrModule" />
- <bean class="org.openurp.webapp.apps.teach.attendance.college.CollegeModule" />
- <bean class="org.openurp.webapp.apps.teach.attendance.teacher.TeacherModule" />
- <bean class="org.openurp.webapp.apps.teach.attendance.student.StudentModule" />
- <bean
-  class="org.openurp.webapp.apps.teach.attendance.counselor.CounselorModule" />
 </beans>

@@ -20,17 +20,25 @@ class AttendanceAction extends EntityDrivenAction {
   override def remove() = null
 
   protected def getUser(): UrpUserBean = {
-    if (SecurityContext.principal == SecurityContext.Anonymous) null
-    else entityDao.get(classOf[UrpUserBean], SecurityContext.principal.asInstanceOf[Account].id)
+    getUserId() match {
+      case Some(id) =>
+        entityDao.get(classOf[UrpUserBean], SecurityContext.principal.asInstanceOf[Account].id)
+      case _ => null
+    }
   }
-  
+
+  protected def getUserId(): Option[Long] = {
+    if (SecurityContext.principal == SecurityContext.Anonymous) None
+    else Some(SecurityContext.principal.asInstanceOf[Account].id.asInstanceOf[Long])
+  }
+
   override def index() = {
     val form = populateForm()
     val item = attendanceService.count(form)
     put("item", item)
     put("college", attendanceService getCollege form.collegeId)
-    if (form.departmentId != 0) {
-      put("college", attendanceService getCollege form.departmentId)
+    if (form.lessonCollegeId != 0) {
+      put("college", attendanceService getCollege form.lessonCollegeId)
     }
     put("teacher", attendanceService getTeacher form.teacherId)
     put("lesson", attendanceService getLesson form.jxrwId)
@@ -55,6 +63,14 @@ class AttendanceAction extends EntityDrivenAction {
     val form = new Form()
     populate(form, "f").asInstanceOf[Form]
     form
+  }
+
+  def getTeacherId(): Long = {
+    attendanceService.getTeacherId(getUser.code)
+  }
+
+  def getStuentId(): Long = {
+    attendanceService.getStudentId(getUser.code)
   }
 
 }

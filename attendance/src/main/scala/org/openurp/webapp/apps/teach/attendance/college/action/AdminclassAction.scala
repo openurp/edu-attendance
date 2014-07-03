@@ -8,10 +8,4 @@ class AdminclassAction extends CollegeAction {
 
   override protected def findItem(form: Form) = attendanceService findAdminclassItem form
 
-  
-  override def populateForm(): Form = {
-    val form = super.populateForm
-    form.departmentId = 24
-    form
-  }
 }

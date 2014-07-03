@@ -9,8 +9,8 @@ class Form extends NumIdBean[Int] {
   var startDate: Date = _
   var endDate: Date = _
   var days: Long = _
-  var collegeId: Long = _
-  var departmentId: Long = _
+  var collegeId: Int = _
+  var lessonCollegeId:Int = _
   var teacherId: Long = _
   var teacherName: String = _
   var studentId:Long = _
@@ -24,7 +24,7 @@ class Form extends NumIdBean[Int] {
     (if (jxrwId != 0) s"&f.jxrwId=${jxrwId}" else "") +
       (if (teacherId != 0) s"&f.teacherId=${teacherId}" else "") +
       (if (adminclassId != 0) s"&f.adminclassId=${adminclassId}" else "") +
-      (if (departmentId != 0) s"&f.departmentId=${departmentId}" else "") +
+      (if (lessonCollegeId != 0) s"&f.lessonCollegeId=${lessonCollegeId}" else "") +
       (if (collegeId != 0) s"&f.collegeId=${collegeId}" else "") + dayParams
   }
   def dayParams: String = {

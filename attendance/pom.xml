@@ -64,6 +64,11 @@
       <version>${beangle.security.version}</version>
     </dependency>
     <dependency>
+      <groupId>org.beangle.security</groupId>
+      <artifactId>beangle-security-cas</artifactId>
+      <version>${beangle.security.version}</version>
+    </dependency>
+    <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-core</artifactId>
       <version>${hibernate.version}</version>
