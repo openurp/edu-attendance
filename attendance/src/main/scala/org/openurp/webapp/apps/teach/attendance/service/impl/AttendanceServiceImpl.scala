@@ -177,7 +177,6 @@ class AttendanceServiceImpl extends AttendanceService {
 
   def find(sql: SqlBuilder, form: Form, p: (Seq[_], Item) => Unit): Seq[Item] = {
     sql.param("start", form.startDate).param("end", form.endDate)
-    println(sql.build.statement)
     val result = attendanceDao.search(sql.build)
     val map = new HashMap[Any, Item]()
     for (o <- result) {
