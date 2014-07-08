@@ -7,9 +7,9 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.openurp.webapp.apps</groupId>
   <artifactId>openurp-webapp-apps-teach-attendance</artifactId>
-  <packaging>jar</packaging>
+  <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
-  <name>OpenURP Teaching-Attendace</name>
+  <name>OpenURP WebApps Teaching-Attendace</name>
 
   <properties>
     <bundle.symbolicName>org.openurp.webapp.apps.teach.attendance</bundle.symbolicName>
@@ -19,6 +19,7 @@
     <beangle.struts2.version>4.0.2-SNAPSHOT</beangle.struts2.version>
     <beangle.security.version>4.0.2-SNAPSHOT</beangle.security.version>
     <hibernate.version>4.3.1.Final</hibernate.version>
+    <ognl.version>3.0.6</ognl.version>
   </properties>
 
   <dependencies>
@@ -27,7 +28,17 @@
       <artifactId>javax.servlet-api</artifactId>
       <scope>provided</scope>
     </dependency>
-    
+    <dependency>
+      <groupId>ognl</groupId>
+      <artifactId>ognl</artifactId>
+      <version>${ognl.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>javassist</groupId>
+          <artifactId>javassist</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
     <dependency>
       <groupId>org.beangle.spring</groupId>
       <artifactId>beangle-spring-hibernate</artifactId>
@@ -86,6 +97,7 @@
     <dependency>
       <groupId>com.h2database</groupId>
       <artifactId>h2</artifactId>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 </project>
