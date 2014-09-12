@@ -8,6 +8,6 @@
   [#elseif type == "th"]
     <th>上课院系</th>
   [#elseif type == "td"]
-    <td>[@b.a href="adminclass?f.departmentId=${item.id!}${f.params}"]${item.name!}[/@]</td>
+    <td>[@b.a href="adminclass?f.collegeId=${item.id!}${f.params}"]${item.name!}[/@]</td>
   [/#if]
 [/@]
