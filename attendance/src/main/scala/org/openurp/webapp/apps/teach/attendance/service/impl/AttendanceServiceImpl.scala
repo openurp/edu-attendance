@@ -143,10 +143,10 @@ class AttendanceServiceImpl extends AttendanceService {
       from dutyreport1 d
       join jcxx_bj_xs_t bjxs on bjxs.xsid = d.stuid
       join jcxx_bj_t bj on bj.id = bjxs.bjid
-      join jcxx_jzg_t ls on ls.id = bj.fdyid
+      left join jcxx_jzg_t ls on ls.id = bj.fdyid
       where d.attenddate between :start and :end""" +
       (if (form.counselorId != 0) s" and bj.fdyid = ${form.counselorId}" else "") +
-      (if (form.collegeId != 0) s" and d.departmentid = ${form.collegeId}" else "") +
+      (if (form.collegeId != 0) s" and bj.bmid = ${form.collegeId}" else "") +
       (if (form.adminclassName != null) s" and bj.bjmc like '%${form.adminclassName}%'" else "") +
       (if (form.teacherName != null) s" and ls.xm like '%${form.teacherName}%'" else "") +
       " group by bj.id, bj.bjdm, bj.bjmc, ls.xm, d.attendtype"
@@ -184,8 +184,8 @@ class AttendanceServiceImpl extends AttendanceService {
       item + (Integer.parseInt(o(1).toString()), Integer.parseInt(o(2).toString()))
       item.code = o(3).toString
       item.name = o(4).toString
-      if (o.length >= 6) item.name2 = o(5).toString
-      if (o.length >= 7) item.name3 = o(6).toString
+      if (o.length >= 6) item.name2 = if(o(5) != null) o(5).toString else ""
+      if (o.length >= 7) item.name3 = if(o(6) != null) o(6).toString else ""
       if (p != null) p(o, item)
     }
     val seq = map.values.toSeq

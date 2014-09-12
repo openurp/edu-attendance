@@ -4,8 +4,8 @@
   [#if type == "nav"]
     <ol class="breadcrumb">
       <li>[@b.a href="college"]首页[/@]</li>
-      <li>[@b.a href="adminclass?f.departmentId=${college.id}${f.dayParams}"]${college.name}[/@]</li>
-      <li>[@b.a href="student?f.adminclassId=${adminclass.id}&f.departmentId=${college.id}${f.dayParams}"]${adminclass.name}[/@]</li>
+      <li>[@b.a href="adminclass?f.collegeId=${college.id}${f.dayParams}"]${college.name}[/@]</li>
+      <li>[@b.a href="student?f.adminclassId=${adminclass.id}&f.collegeId=${college.id}${f.dayParams}"]${adminclass.name}[/@]</li>
       <li class="active">${student.name}</li>
     </ol>
   [#elseif type == "th"]
