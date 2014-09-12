@@ -36,9 +36,9 @@ class AttendanceAction extends EntityDrivenAction {
     val form = populateForm()
     val item = attendanceService.count(form)
     put("item", item)
-    put("college", attendanceService getCollege form.collegeId)
-    if (form.lessonCollegeId != 0) {
-      put("college", attendanceService getCollege form.lessonCollegeId)
+    put("college", attendanceService getCollege form.kkxyId)
+    if (form.skxyId != 0) {
+      put("college", attendanceService getCollege form.skxyId)
     }
     put("teacher", attendanceService getTeacher form.teacherId)
     put("lesson", attendanceService getLesson form.jxrwId)

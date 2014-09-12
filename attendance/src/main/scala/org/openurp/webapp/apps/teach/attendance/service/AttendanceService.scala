@@ -8,9 +8,9 @@ trait AttendanceService {
 
   def count(form: Form): Item
 
-  def findCollegeItem(form: Form): Seq[Item]
+  def findKkxyItem(form: Form): Seq[Item]
   
-  def findDepartmentItem(form: Form): Seq[Item]
+  def findSkxyItem(form: Form): Seq[Item]
 
   def findTeacherItem(form: Form): Seq[Item]
 

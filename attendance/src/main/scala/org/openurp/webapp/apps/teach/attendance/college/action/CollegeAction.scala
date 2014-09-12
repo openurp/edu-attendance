@@ -8,7 +8,7 @@ class CollegeAction extends AttendanceAction {
 
   override def populateForm(): Form = {
     val form = super.populateForm
-    form.collegeId = getUser.department.id.asInstanceOf[Number].intValue()
+    form.kkxyId = getUser.department.id.asInstanceOf[Number].intValue()
     form
   }
 }

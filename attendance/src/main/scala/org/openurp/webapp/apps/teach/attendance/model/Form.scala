@@ -9,8 +9,9 @@ class Form extends NumIdBean[Int] {
   var startDate: Date = _
   var endDate: Date = _
   var days: Long = _
-  var collegeId: Int = _
-  var lessonCollegeId:Int = _
+  var kkxyId: Int = _
+  var enableKkxyId = true
+  var skxyId:Int = _
   var teacherId: Long = _
   var teacherName: String = _
   var studentId:Long = _
@@ -24,8 +25,8 @@ class Form extends NumIdBean[Int] {
     (if (jxrwId != 0) s"&f.jxrwId=${jxrwId}" else "") +
       (if (teacherId != 0) s"&f.teacherId=${teacherId}" else "") +
       (if (adminclassId != 0) s"&f.adminclassId=${adminclassId}" else "") +
-      (if (lessonCollegeId != 0) s"&f.lessonCollegeId=${lessonCollegeId}" else "") +
-      (if (collegeId != 0) s"&f.collegeId=${collegeId}" else "") + dayParams
+      (if (kkxyId != 0) s"&f.kkxyId=${kkxyId}" else "") +
+      (if (skxyId != 0) s"&f.skxyId=${skxyId}" else "") + dayParams
   }
   def dayParams: String = {
     val sdf = new SimpleDateFormat("YYYY-MM-dd")

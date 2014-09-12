@@ -20,7 +20,7 @@ class AttendanceServiceImpl extends AttendanceService {
     val sql = """
       select d.attendtype, count(*)
       from dutyreport1 d""" +
-      (if (form.collegeId != 0) " join jxrw_t rw on d.jxrwid = rw.id" else "") +
+      (if (form.enableKkxyId && form.kkxyId != 0) " join jxrw_t rw on d.jxrwid = rw.id" else "") +
       (if (form.teacherId != 0) " join jxrw_ls_t rwls on rwls.jxrwid = d.jxrwid" else "") +
       (if (form.adminclassId != 0 || form.counselorId != 0)
         """ join jcxx_bj_xs_t bjxs on bjxs.xsid = d.stuid
@@ -32,9 +32,10 @@ class AttendanceServiceImpl extends AttendanceService {
       (if (form.teacherId != 0) s" and rwls.lsid=${form.teacherId}" else "") +
       (if (form.counselorId != 0) s" and bj.fdyid=${form.counselorId}" else "") +
       (if (form.adminclassId != 0) s" and bjxs.bjid=${form.adminclassId}" else "") +
-      (if (form.lessonCollegeId != 0) s" and rw.kkyx=${form.lessonCollegeId}" else "") +
-      (if (form.collegeId != 0) s" and d.departmentid=${form.collegeId}" else "") +
+      (if (form.skxyId != 0) s" and d.departmentid=${form.skxyId}" else "") +
+      (if (form.enableKkxyId && form.kkxyId != 0) s" and rw.kkyx=${form.kkxyId}" else "") +
       " group by d.attendtype"
+    println(sql)
     val query = SqlBuilder.sql(sql).params(Map[String, Any]()).param("start", form.startDate).param("end", form.endDate)
     val result = attendanceDao.search(query.build)
     val count = new Item()
@@ -65,7 +66,7 @@ class AttendanceServiceImpl extends AttendanceService {
     }
   }
 
-  def findCollegeItem(form: Form): Seq[Item] = {
+  def findKkxyItem(form: Form): Seq[Item] = {
     val sql = """
       select bm.id, d.attendtype, count(*) as num, bm.bmdm, bm.bmmc
       from dutyreport1 d
@@ -78,7 +79,7 @@ class AttendanceServiceImpl extends AttendanceService {
     find(query, form)
   }
 
-  def findDepartmentItem(form: Form): Seq[Item] = {
+  def findSkxyItem(form: Form): Seq[Item] = {
     val sql = """
       select bm.id, d.attendtype, count(*) as num, bm.bmdm, bm.bmmc
       from dutyreport1 d
@@ -98,7 +99,7 @@ class AttendanceServiceImpl extends AttendanceService {
       join jxrw_ls_t rwls on rwls.jxrwid = d.jxrwid
       join jcxx_jzg_t ls on ls.id = rwls.lsid
       where d.attenddate between :start and :end""" +
-      (if (form.collegeId != 0) s" and rw.kkyx = ${form.collegeId}" else "") +
+      (if (form.kkxyId != 0) s" and rw.kkyx = ${form.kkxyId}" else "") +
       (if (form.teacherName != null) s" and ls.xm like '%${form.teacherName}%'" else "") +
       " group by ls.id, ls.jszgh, ls.xm, d.attendtype"
     val query = SqlBuilder.sql(sql).params(Map[String, Any]())
@@ -126,13 +127,14 @@ class AttendanceServiceImpl extends AttendanceService {
       select xs.id, d.attendtype, count(*) as num, xs.xh, xs.xm
       from dutyreport1 d
       join xsxx_t xs on xs.id = d.stuid""" +
-      (if (form.adminclassId != 0) " join jcxx_bj_xs_t bjxs on bjxs.xsid = d.stuid" else "" )+
+      (if (form.adminclassId != 0) " join jcxx_bj_xs_t bjxs on bjxs.xsid = d.stuid" else "") +
       " where d.attenddate between :start and :end" +
       (if (form.jxrwId != 0) s" and d.jxrwid = ${form.jxrwId}" else "") +
       (if (form.adminclassId != 0) s" and bjxs.bjid = ${form.adminclassId}" else "") +
       (if (form.studentName != null) s" and xs.xm like '%${form.studentName}%'" else "") +
-      //(if (form.collegeId != 0) s" and d.departmentid=${form.collegeId}" else "") +
+      //(if (form.kkxyId != 0) s" and d.departmentid=${form.kkxyId}" else "") +
       " group by xs.id, xs.xh, xs.xm, d.attendtype"
+      println(sql)
     val query = SqlBuilder.sql(sql).params(Map[String, Any]())
     find(query, form)
   }
@@ -143,13 +145,17 @@ class AttendanceServiceImpl extends AttendanceService {
       from dutyreport1 d
       join jcxx_bj_xs_t bjxs on bjxs.xsid = d.stuid
       join jcxx_bj_t bj on bj.id = bjxs.bjid
+      join jcxx_zy_t zy on bj.zyid = zy.id
       left join jcxx_jzg_t ls on ls.id = bj.fdyid
-      where d.attenddate between :start and :end""" +
+      where d.attenddate between :start and :end and zy.zylbid = 1 """ +
       (if (form.counselorId != 0) s" and bj.fdyid = ${form.counselorId}" else "") +
-      (if (form.collegeId != 0) s" and bj.bmid = ${form.collegeId}" else "") +
+      (if (form.skxyId != 0) s" and d.departmentid = ${form.skxyId}" else "") +
+      (if (form.kkxyId != 0) s" and bj.bmid = ${form.kkxyId}" else "") +
       (if (form.adminclassName != null) s" and bj.bjmc like '%${form.adminclassName}%'" else "") +
       (if (form.teacherName != null) s" and ls.xm like '%${form.teacherName}%'" else "") +
       " group by bj.id, bj.bjdm, bj.bjmc, ls.xm, d.attendtype"
+    println("findAdminclassItem")
+    println(sql)
     val query = SqlBuilder.sql(sql).params(Map[String, Any]())
     find(query, form)
   }
@@ -162,11 +168,10 @@ class AttendanceServiceImpl extends AttendanceService {
       left join device_js skjs on skjs.devid = d.devid
       left join jcxx_js_t js on js.id = skjs.jsid 
       where d.attenddate between :start and :end
-      and d.stuid = ${form.studentId }
+      and d.stuid = ${form.studentId}
       and d.jxrwid = ${form.jxrwId}
       order by d.attenddate"""
     val query = SqlBuilder.sql(sql).params(Map[String, Any]())
-    query.param("start", form.startDate).param("end", form.endDate)
     val result = attendanceDao.search(query.build)
     result.asInstanceOf[Seq[Item]]
   }
@@ -184,8 +189,8 @@ class AttendanceServiceImpl extends AttendanceService {
       item + (Integer.parseInt(o(1).toString()), Integer.parseInt(o(2).toString()))
       item.code = o(3).toString
       item.name = o(4).toString
-      if (o.length >= 6) item.name2 = if(o(5) != null) o(5).toString else ""
-      if (o.length >= 7) item.name3 = if(o(6) != null) o(6).toString else ""
+      if (o.length >= 6) item.name2 = if (o(5) != null) o(5).toString else ""
+      if (o.length >= 7) item.name3 = if (o(6) != null) o(6).toString else ""
       if (p != null) p(o, item)
     }
     val seq = map.values.toSeq
@@ -193,13 +198,13 @@ class AttendanceServiceImpl extends AttendanceService {
       seq.sortBy(if (form.sortBy == "signRate") _.signRate else _.absenceRate).reverse
     } else seq.sortBy(_.code)
   }
-  
+
   def getTeacher(teacherId: Long): IdNameObject = {
     get(teacherId, s"select id, xm from jcxx_jzg_t where id = ${teacherId}")
   }
 
-  def getCollege(collegeId: Long): IdNameObject = {
-    get(collegeId, s"select id, bmmc from jcxx_bm_t where id = ${collegeId}")
+  def getCollege(kkxyId: Long): IdNameObject = {
+    get(kkxyId, s"select id, bmmc from jcxx_bm_t where id = ${kkxyId}")
   }
   def getLesson(jxrwId: Long): IdNameObject = {
     get(jxrwId, s"select kc.id, kc.kcmc from jxrw_t rw join jcxx_kc_t kc on kc.id = rw.kcid where rw.id = ${jxrwId}")
@@ -225,14 +230,14 @@ class AttendanceServiceImpl extends AttendanceService {
   def getTeacherId(code: String): Long = {
     val sql = s"select id from jcxx_jzg_t where jszgh = ${code}"
     val result = attendanceDao.search(SqlBuilder.sql(sql).build)
-    if(result.isEmpty) 0 
+    if (result.isEmpty) 0
     else result(0).asInstanceOf[Number].longValue
   }
-  
+
   def getStudentId(code: String): Long = {
     val sql = s"select id from xsxx_t where xh = ${code}"
     val result = attendanceDao.search(SqlBuilder.sql(sql).build)
-    if(result.isEmpty) 0 
+    if (result.isEmpty) 0
     else result(0).asInstanceOf[Number].longValue
   }
 }

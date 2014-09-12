@@ -11,7 +11,7 @@ class LessonStudentAction extends CollegeAction {
 
   override def populateForm(): Form = {
     val form = super.populateForm
-    form.collegeId = 0
+    form.kkxyId = 0
     form
   }
 }

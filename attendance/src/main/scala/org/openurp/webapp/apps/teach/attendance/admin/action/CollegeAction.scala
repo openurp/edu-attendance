@@ -5,6 +5,6 @@ import org.openurp.webapp.apps.teach.attendance.model.Form
 
 class CollegeAction extends AttendanceAction {
 
-  override protected def findItem(form: Form) = attendanceService findCollegeItem form
+  override protected def findItem(form: Form) = attendanceService findKkxyItem form
 
 }

@@ -5,6 +5,12 @@ import org.openurp.webapp.apps.teach.attendance.AttendanceAction
 import org.openurp.webapp.apps.teach.attendance.model.Form
 
 class StudentLessonAction extends CollegeAction{
+  
+  override def populateForm(): Form = {
+    val form = super.populateForm()
+    form.enableKkxyId = false
+    form
+  }
 
   override protected def findItem(form: Form) = attendanceService findLessonItem form
 

@@ -4,7 +4,7 @@
   [#if type == "nav"]
     <ol class="breadcrumb">
       <li>[@b.a href="college"]首页[/@]</li>
-      <li>[@b.a href="teacher?f.collegeId=${college.id}${f.dayParams}"]${college.name}[/@]</li>
+      <li>[@b.a href="teacher?f.kkxyId=${college.id}${f.dayParams}"]${college.name}[/@]</li>
       <li class="active">${teacher.name}</li>
     </ol>
   [#elseif type == "th"]
