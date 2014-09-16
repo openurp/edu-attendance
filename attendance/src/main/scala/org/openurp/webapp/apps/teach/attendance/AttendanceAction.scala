@@ -1,6 +1,5 @@
 package org.openurp.webapp.apps.teach.attendance
 
-import org.beangle.struts2.action.EntityDrivenAction
 import org.openurp.webapp.apps.teach.attendance.model.Form
 import org.openurp.webapp.apps.teach.attendance.service.AttendanceService
 import java.sql.Date
@@ -8,19 +7,20 @@ import org.openurp.webapp.apps.teach.attendance.model.Item
 import org.beangle.security.context.SecurityContext
 import org.beangle.security.authc.Account
 import org.openurp.kernel.base.unit.model.UrpUserBean
+import org.beangle.webmvc.entity.action.EntityDrivenAction
 
 class AttendanceAction extends EntityDrivenAction {
 
   var attendanceService: AttendanceService = _
 
-  override protected def entityType: Class[_] = classOf[Form]
-  override def search() = forward
+  override def getEntityType: Class[_] = classOf[Form]
+  override def search() = forward()
   override def edit() = null
   override def save() = null
   override def remove() = null
 
   protected def getUser(): UrpUserBean = {
-    getUserId() match {
+  getUserId() match {
       case Some(id) =>
         entityDao.get(classOf[UrpUserBean], SecurityContext.principal.asInstanceOf[Account].id)
       case _ => null
@@ -47,14 +47,14 @@ class AttendanceAction extends EntityDrivenAction {
     put("f", form)
     put("items", findItem(form))
     val action = {
-      val action = getRequest.getRequestURI() +
-        (if (getRequest.getQueryString() != null) "?" + getRequest.getQueryString() else "")
+      val action = request.getRequestURI() +
+        (if (request.getQueryString() != null) "?" + request.getQueryString() else "")
       if (action.lastIndexOf("&f.days=") > 0) {
         action.substring(0, action.lastIndexOf("&f.days="))
       } else action
     }
     put("formAction", action)
-    forward
+    forward()
   }
 
   protected def findItem(form: Form): Seq[Item] = null

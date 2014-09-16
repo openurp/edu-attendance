@@ -3,7 +3,6 @@ package org.openurp.webapp.apps.teach.attendance
 import org.beangle.commons.inject.bind.AbstractBindModule
 import org.beangle.commons.io.ClasspathResourceLoader
 import org.beangle.commons.web.resource.ResourceProcessor
-import org.beangle.commons.web.resource.filter.{ ContentTypeFilter, HeaderFilter }
 import org.beangle.commons.web.resource.impl.PathResolverImpl
 import org.openurp.webapp.apps.teach.attendance.service.EhcacheManager
 import org.openurp.webapp.apps.teach.attendance.service.impl.AttendanceServiceImpl
@@ -18,10 +17,10 @@ class AttendanceModule extends AbstractBindModule {
 
   def binding(): Unit = {
     bind(classOf[PathResolverImpl])
-    bind(classOf[ClasspathResourceLoader]).constructor("static")
+//    bind(classOf[ClasspathResourceLoader]).constructor("static")
 
-    bind(classOf[ResourceProcessor]).property("filters", list(classOf[ContentTypeFilter], classOf[HeaderFilter]))
-
+//    bind(classOf[ResourceProcessor]).property("filters", list(classOf[ContentTypeFilter], classOf[HeaderFilter]))
+    bind(classOf[HttpMethodPermissionFilter])
     bind(classOf[EhcacheManager])
 
     bind("eamsDataSource", classOf[JndiDataSourceFactory]).constructor("jdbc/eams")

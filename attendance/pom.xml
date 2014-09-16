@@ -16,7 +16,7 @@
     <bundle.namespace>org.openurp.webapp.apps.teach.attendance</bundle.namespace>
     <beangle.version>4.1.0-SNAPSHOT</beangle.version>
     <beangle.spring.version>4.0.3-SNAPSHOT</beangle.spring.version>
-    <beangle.struts2.version>4.0.2-SNAPSHOT</beangle.struts2.version>
+    <beangle.webmvc.version>0.1.0-SNAPSHOT</beangle.webmvc.version>
     <beangle.security.version>4.0.2-SNAPSHOT</beangle.security.version>
     <hibernate.version>4.3.1.Final</hibernate.version>
     <ognl.version>3.0.6</ognl.version>
@@ -50,9 +50,29 @@
       <version>${beangle.spring.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.beangle.struts2</groupId>
-      <artifactId>beangle-struts2-convention</artifactId>
-      <version>${beangle.struts2.version}</version>
+      <groupId>org.beangle.webmvc</groupId>
+      <artifactId>beangle-webmvc-webxml-plugin</artifactId>
+      <version>${beangle.webmvc.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.beangle.webmvc</groupId>
+      <artifactId>beangle-webmvc-entity-plugin</artifactId>
+      <version>${beangle.webmvc.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.beangle.webmvc</groupId>
+      <artifactId>beangle-webmvc-tag</artifactId>
+      <version>${beangle.webmvc.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.beangle.webmvc</groupId>
+      <artifactId>beangle-webmvc-config-plugin</artifactId>
+      <version>${beangle.webmvc.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.beangle.webmvc</groupId>
+      <artifactId>beangle-webmvc-bootstrap-ui</artifactId>
+      <version>${beangle.webmvc.version}</version>
     </dependency>
     <dependency>
       <groupId>org.beangle.security</groupId>
@@ -89,15 +109,21 @@
       <artifactId>hibernate-ehcache</artifactId>
       <version>${hibernate.version}</version>
     </dependency>
-    <dependency>
-      <groupId>org.beangle.struts2</groupId>
-      <artifactId>beangle-struts2-view</artifactId>
-      <version>${beangle.struts2.version}</version>
-    </dependency>
+    
     <dependency>
       <groupId>com.h2database</groupId>
       <artifactId>h2</artifactId>
       <scope>test</scope>
+    </dependency>
+        <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-core</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <scope>runtime</scope>
     </dependency>
   </dependencies>
 </project>

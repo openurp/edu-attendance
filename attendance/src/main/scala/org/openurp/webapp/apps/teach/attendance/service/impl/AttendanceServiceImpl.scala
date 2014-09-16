@@ -172,6 +172,7 @@ class AttendanceServiceImpl extends AttendanceService {
       and d.jxrwid = ${form.jxrwId}
       order by d.attenddate"""
     val query = SqlBuilder.sql(sql).params(Map[String, Any]())
+    query.param("start", form.startDate).param("end", form.endDate)
     val result = attendanceDao.search(query.build)
     result.asInstanceOf[Seq[Item]]
   }

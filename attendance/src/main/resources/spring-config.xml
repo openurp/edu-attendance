@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans>
 
- <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
-  <property name="jndiName">
-   <value>java:comp/env/jdbc/security</value>
-  </property>
+ <bean id="DataSource.default" class="org.beangle.commons.jndi.JndiDataSourceFactory">
+  <constructor-arg value="jdbc/security"/>
  </bean>
 
- <bean id="hibernateConfig">
+ <bean id="HibernateConfig.default">
   <property name="properties">
    <props merge="true">
     <prop key="hibernate.show_sql">true</prop>
@@ -30,7 +28,7 @@
     <constructor-arg>
       <list>
         <ref bean="org.beangle.security.realm.cas.CasPreauthFilter"/>
-        <ref bean="org.beangle.security.web.access.HttpMethodPermissionFilter"/>
+        <ref bean="org.openurp.webapp.apps.teach.attendance.HttpMethodPermissionFilter"/>
       </list>
     </constructor-arg>
     <constructor-arg value="?" />
