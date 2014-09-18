@@ -35,7 +35,7 @@ class AttendanceServiceImpl extends AttendanceService {
       (if (form.skxyId != 0) s" and d.departmentid=${form.skxyId}" else "") +
       (if (form.enableKkxyId && form.kkxyId != 0) s" and rw.kkyx=${form.kkxyId}" else "") +
       " group by d.attendtype"
-    println(sql)
+//    println(sql)
     val query = SqlBuilder.sql(sql).params(Map[String, Any]()).param("start", form.startDate).param("end", form.endDate)
     val result = attendanceDao.search(query.build)
     val count = new Item()
@@ -134,7 +134,7 @@ class AttendanceServiceImpl extends AttendanceService {
       (if (form.studentName != null) s" and xs.xm like '%${form.studentName}%'" else "") +
       //(if (form.kkxyId != 0) s" and d.departmentid=${form.kkxyId}" else "") +
       " group by xs.id, xs.xh, xs.xm, d.attendtype"
-      println(sql)
+//      println(sql)
     val query = SqlBuilder.sql(sql).params(Map[String, Any]())
     find(query, form)
   }
@@ -154,8 +154,8 @@ class AttendanceServiceImpl extends AttendanceService {
       (if (form.adminclassName != null) s" and bj.bjmc like '%${form.adminclassName}%'" else "") +
       (if (form.teacherName != null) s" and ls.xm like '%${form.teacherName}%'" else "") +
       " group by bj.id, bj.bjdm, bj.bjmc, ls.xm, d.attendtype"
-    println("findAdminclassItem")
-    println(sql)
+//    println("findAdminclassItem")
+//    println(sql)
     val query = SqlBuilder.sql(sql).params(Map[String, Any]())
     find(query, form)
   }

@@ -50,9 +50,10 @@ class AttendanceAction extends EntityDrivenAction {
       val action = request.getRequestURI() +
         (if (request.getQueryString() != null) "?" + request.getQueryString() else "")
       if (action.lastIndexOf("&f.days=") > 0) {
-        action.substring(0, action.lastIndexOf("&f.days="))
+        action.replaceAll("&f\\.days=\\d+", "")
       } else action
     }
+//    println(action)
     put("formAction", action)
     forward()
   }
