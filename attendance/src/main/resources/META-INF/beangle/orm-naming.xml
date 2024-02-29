@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<modules>
-  <module package = "org.beangle.security.blueprint.domain" plau="true" schema="security">
-    <module package = "User" schema="base"/>
-    <module package = "UserCategory" schema="base"/>
-  </module>
-  <module package = "org.openurp.kernel.base.unit.model" plau="true" schema="base">
-  </module>
-</modules>
