@@ -19,8 +19,8 @@ package org.openurp.edu.attendance.web.action.admin
 
 import org.beangle.commons.activation.MediaTypes
 import org.beangle.data.dao.OqlBuilder
-import org.beangle.data.excel.schema.ExcelSchema
-import org.beangle.data.transfer.importer.ImportSetting
+import org.beangle.doc.excel.schema.ExcelSchema
+import org.beangle.doc.transfer.importer.ImportSetting
 import org.beangle.web.action.annotation.{mapping, param, response}
 import org.beangle.web.action.view.{Stream, View}
 import org.beangle.webmvc.support.action.{ExportSupport, ImportSupport, RestfulAction}

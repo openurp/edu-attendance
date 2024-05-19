@@ -23,33 +23,20 @@ ThisBuild / developers := List(
 ThisBuild / description := "OpenURP Edu Attendance"
 ThisBuild / homepage := Some(url("http://openurp.github.io/edu-attendance/index.html"))
 
-val apiVer = "0.37.1"
-val starterVer = "0.3.23"
-val baseVer = "0.4.20"
-val eduCoreVer = "0.0.18"
+val apiVer = "0.39.1"
+val starterVer = "0.3.32"
+val baseVer = "0.4.24"
+val eduCoreVer = "0.2.6"
 val openurp_edu_api = "org.openurp.edu" % "openurp-edu-api" % apiVer
 val openurp_stater_web = "org.openurp.starter" % "openurp-starter-web" % starterVer
 val openurp_base_tag = "org.openurp.base" % "openurp-base-tag" % baseVer
 val openurp_edu_core = "org.openurp.edu" % "openurp-edu-core" % eduCoreVer
 
-lazy val root = (project in file("."))
-  .settings()
-  .aggregate(web, webapp)
-
-lazy val web = (project in file("web"))
+lazy val web = (project in file("."))
   .enablePlugins(WarPlugin, TomcatPlugin)
   .settings(
-    name := "openurp-edu-attendance-web",
+    name := "openurp-edu-attendance-webapp",
     libraryDependencies ++= Seq(openurp_stater_web, openurp_edu_core),
     libraryDependencies ++= Seq(openurp_edu_api, beangle_ems_app, openurp_base_tag),
     common
   )
-
-lazy val webapp = (project in file("webapp"))
-  .enablePlugins(WarPlugin, TomcatPlugin)
-  .settings(
-    name := "openurp-edu-attendance-webapp",
-    common
-  ).dependsOn(web)
-
-publish / skip := true

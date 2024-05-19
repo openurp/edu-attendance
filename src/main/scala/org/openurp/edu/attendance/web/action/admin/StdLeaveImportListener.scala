@@ -18,7 +18,7 @@
 package org.openurp.edu.attendance.web.action.admin
 
 import org.beangle.data.dao.{EntityDao, OqlBuilder}
-import org.beangle.data.transfer.importer.{ImportListener, ImportResult}
+import org.beangle.doc.transfer.importer.{ImportListener, ImportResult}
 import org.openurp.base.model.Project
 import org.openurp.base.service.SemesterService
 import org.openurp.base.std.model.Student
