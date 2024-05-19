@@ -1,4 +1,4 @@
 webapp-apps-teach
 =================
 
-OpenURP Teaching WebApp
+OpenURP Edu Attendance WebApp

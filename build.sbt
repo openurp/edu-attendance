@@ -2,7 +2,7 @@ import org.openurp.parent.Dependencies.*
 import org.openurp.parent.Settings.*
 
 ThisBuild / organization := "org.openurp.edu.attendance"
-ThisBuild / version := "0.0.3-SNAPSHOT"
+ThisBuild / version := "0.0.1"
 
 ThisBuild / scmInfo := Some(
   ScmInfo(
@@ -32,7 +32,7 @@ val openurp_stater_web = "org.openurp.starter" % "openurp-starter-web" % starter
 val openurp_base_tag = "org.openurp.base" % "openurp-base-tag" % baseVer
 val openurp_edu_core = "org.openurp.edu" % "openurp-edu-core" % eduCoreVer
 
-lazy val web = (project in file("."))
+lazy val root = (project in file("."))
   .enablePlugins(WarPlugin, TomcatPlugin)
   .settings(
     name := "openurp-edu-attendance-webapp",
