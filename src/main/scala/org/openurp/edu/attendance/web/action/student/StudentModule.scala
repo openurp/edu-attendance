@@ -17,7 +17,7 @@
 
 package org.openurp.edu.attendance.web.action.student
 
-import org.beangle.cdi.bind.BindModule
+import org.beangle.commons.cdi.BindModule
 
 class StudentModule extends BindModule {
 

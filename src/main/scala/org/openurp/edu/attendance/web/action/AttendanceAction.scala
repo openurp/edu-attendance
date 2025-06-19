@@ -19,8 +19,8 @@ package org.openurp.edu.attendance.web.action
 
 import org.beangle.data.dao.EntityDao
 import org.beangle.security.Securities
-import org.beangle.web.action.context.ActionContext
-import org.beangle.web.action.support.ActionSupport
+import org.beangle.webmvc.context.ActionContext
+import org.beangle.webmvc.support.ActionSupport
 import org.beangle.webmvc.support.action.EntityAction
 import org.openurp.base.model.User
 import org.openurp.edu.attendance.service.{AttendanceService, Form, Item}

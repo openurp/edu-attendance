@@ -17,7 +17,7 @@
 
 package org.openurp.edu.attendance.web.action.counselor
 
-import org.beangle.cdi.bind.BindModule
+import org.beangle.commons.cdi.BindModule
 
 class CounselorModule extends BindModule {
 

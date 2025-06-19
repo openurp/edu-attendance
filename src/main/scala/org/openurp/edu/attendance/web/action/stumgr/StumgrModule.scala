@@ -17,7 +17,7 @@
 
 package org.openurp.edu.attendance.web.action.stumgr
 
-import org.beangle.cdi.bind.BindModule
+import org.beangle.commons.cdi.BindModule
 
 class StumgrModule extends BindModule {
 

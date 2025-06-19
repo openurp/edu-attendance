@@ -21,8 +21,8 @@ import org.beangle.commons.activation.MediaTypes
 import org.beangle.data.dao.OqlBuilder
 import org.beangle.doc.excel.schema.ExcelSchema
 import org.beangle.doc.transfer.importer.ImportSetting
-import org.beangle.web.action.annotation.{mapping, param, response}
-import org.beangle.web.action.view.{Stream, View}
+import org.beangle.webmvc.annotation.{mapping, param, response}
+import org.beangle.webmvc.view.{Stream, View}
 import org.beangle.webmvc.support.action.{ExportSupport, ImportSupport, RestfulAction}
 import org.openurp.base.model.Project
 import org.openurp.edu.attendance.model.{LeaveType, StdLeave, StdLeaveLesson}
@@ -89,7 +89,7 @@ class StdLeaveAction extends RestfulAction[StdLeave], ProjectSupport, ImportSupp
     sheet.add("事由", "stdLeave.reason").remark("100字以内").required()
     val os = new ByteArrayOutputStream()
     schema.generate(os)
-    Stream(new ByteArrayInputStream(os.toByteArray), MediaTypes.ApplicationXlsx.toString, "学生请假信息.xlsx")
+    Stream(new ByteArrayInputStream(os.toByteArray), MediaTypes.ApplicationXlsx, "学生请假信息.xlsx")
   }
 
   @mapping(value = "{id}")
