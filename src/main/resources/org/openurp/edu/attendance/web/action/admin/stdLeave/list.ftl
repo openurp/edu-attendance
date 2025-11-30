@@ -16,7 +16,7 @@
     [@b.col property="std.state.major.name" title="专业"]
       ${(stdLeave.std.state.major.name)!}${(stdLeave.std.state.direction.name)!}
     [/@]
-    [@b.col property="std.tutor.name"  width="10%" title="导师"/]
+    [@b.col property="std.majorTutorNames"  width="10%" title="导师" sortable="false"/]
     [@b.col property="leaveType" title="类型" width="6%"]${(stdLeave.leaveType)!}[/@]
     [@b.col property="beginAt" title="时间" width="20%"]
       <div title="${stdLeave.reason?html}">
